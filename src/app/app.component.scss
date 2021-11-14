@@ -1,0 +1,57 @@
+.card {
+    width: 100%;
+    display: block;
+    min-width: 300px;
+    min-height: 200px;
+    margin: 10px 0;
+    border: thin solid #AAA;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+textarea {
+    width: 100%;
+    display: block;
+    min-width: 300px;
+    min-height: 200px;
+    margin: 10px 0;
+    border: thin solid #AAA;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+
+    label {
+        background: #fff;
+        margin-bottom: 0;
+    }
+}
+
+.correct {
+    color: #FFF;
+    background-color: #8fb9db;
+}
+
+.wrong {
+    color: #FFF;
+    background-color: #F00;
+}
+
+.hasError {
+    background-color: rgb(255, 198, 137);
+}
+
+.noselect {
+    -webkit-touch-callout: none; 
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+}

@@ -1,0 +1,39 @@
+.my-modal-wrapper.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.my-modal-wrapper {
+    position: fixed;
+    width: 100vw;   
+    height: 100vh;  
+
+    top: 0;
+    left: 0;
+
+    background: rgba(4, 9, 17, .5);
+
+    display: flex;
+
+    visibility: hidden;
+    opacity: 0;
+}
+
+.my-modal-wrapper .my-modal {
+    min-width: min(22rem, 90%);
+    background: #fff;
+    margin: auto;
+
+    border-radius: 4px;
+
+    font-family: 'Poppins', sans-serif;
+    padding: 2rem;
+
+    animation-name: scale;
+    animation-duration: .6s;
+}
+  
+@keyframes scale {
+    0%   {transform: scale(0.5)}
+    100% {transform: scale(1)}
+}
