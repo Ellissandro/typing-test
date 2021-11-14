@@ -38,6 +38,10 @@ form {
     background-color: #8fb9db;
 }
 
+.transition-200ms {
+    transition: 150ms;
+}
+
 .wrong {
     color: #FFF;
     background-color: #F00;
@@ -54,4 +58,10 @@ form {
          -moz-user-select: none;
           -ms-user-select: none;
               user-select: none;
+}
+
+.modal-body {
+    p {
+        margin-bottom: .5rem;
+    }
 }

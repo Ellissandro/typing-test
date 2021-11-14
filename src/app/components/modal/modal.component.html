@@ -1,5 +1,6 @@
 <div class="my-modal-wrapper active">
     <div class="my-modal">
+      <span (click)="onCloseModal.emit()" class="btn-close" aria-hidden="true">&times;</span>
       <ng-content></ng-content>
     </div>
 </div>

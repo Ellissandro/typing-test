@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
   isPrepared = false;
   hasError = false;
   started = false;
+  isModalOpen = true;
 
   generateId = () => uuid.v4();
 
@@ -135,6 +136,10 @@ export class AppComponent implements OnInit {
     
     const typedEverything = this.letters.length === this.inputTextarea.nativeElement.value.length;
     return typedEverything && !this.hasErrors();
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
   }
 }
 

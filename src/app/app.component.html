@@ -33,9 +33,10 @@
                 <input 
                     type="text"
                     id="title"
+                    maxlength="2"
                     name="title"
                     placeholder=" "
-                    class="form-field"
+                    class="form-field text-uppercase"
                 /> 
                 <label for="title">Estado</label>
             </div>
@@ -47,7 +48,7 @@
         <span 
             *ngFor="let letter of letters" 
             [id]="letter.id" 
-            [class]="'noselect ' + letter.class"
+            [class]="'transition-200ms noselect ' + letter.class"
             [class.bg-success]="finished()">{{ letter.text }}</span>
     </div>
 
@@ -83,12 +84,37 @@
             <strong>TPM: </strong>
             <span id="tpm"></span><br>
 
-            <strong>Palavras por minuto: </strong> 
-            <span id="wpm">0</span><br>
-
-            <button type="button" class="btn btn-warning mt-3">Recomeçar com novo texto</button>
+            <button type="button" class="btn btn-warning mt-3">Começar um novo teste</button>
         </div>
     </div>
 </div>
 
 <router-outlet></router-outlet>
+
+<app-modal (onCloseModal)="closeModal()" *ngIf="finished() && isModalOpen">
+    <header class="modal-header">
+        <h1>Parabéns você conseguiu :)</h1>
+    </header>
+
+    <div class="modal-body">
+        <div>
+            <h5 class="mb-3">Aqui está suas estatisticas</h5>
+            
+            <p>
+                <strong>TPM: </strong>
+            </p>
+            <p>
+                <strong>Tempo: </strong>
+                <span>{{ timerDisplay.minutes.digit1 }}{{ timerDisplay.minutes.digit2 }}:{{ timerDisplay.seconds.digit1 }}{{ timerDisplay.seconds.digit2 }}</span>
+            </p> 
+            <p>
+                <strong>Acertos: </strong>
+                <span>{{ hitCounter }}</span>
+            </p> 
+            <p>
+                <strong>Erros: </strong>
+                <span>{{ erroCounter }}</span>
+            </p>
+        </div>
+    </div>
+</app-modal>
