@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   isPrepared = false;
   hasError = false;
   started = false;
-  isModalOpen = true;
+  isModalOpen = false;
 
   generateId = () => uuid.v4();
 
@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
   }
 
   formatText() {
+    this.letters = [];
     const letters = `Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos.`.split('');
 
     letters.forEach(text => {
@@ -82,10 +83,6 @@ export class AppComponent implements OnInit {
   }
 
   checkText() {
-    if (this.finished()) {
-      this.stopTimer();
-    }
-
     if (!this.started) {
       this.startTimer();
     }
@@ -105,6 +102,11 @@ export class AppComponent implements OnInit {
         letterText.class = ClassType.wrong;
       }
     }) 
+
+    if (this.finished()) {
+      this.stopTimer();
+      this.isModalOpen = true;
+    }
 
     this.hasError = this.hasErrors();
   }
@@ -129,13 +131,35 @@ export class AppComponent implements OnInit {
      return this.letters.some(letter => letter.class === ClassType.wrong);
   }
 
+  wroteEverythingRight(): boolean {
+    return this.letters.every(letter => letter.class === ClassType.correct);
+  }
+
   finished(): boolean {
     if (!this.inputTextarea) {
       return false;
     }
     
     const typedEverything = this.letters.length === this.inputTextarea.nativeElement.value.length;
-    return typedEverything && !this.hasErrors();
+    return typedEverything && this.wroteEverythingRight();
+  }
+
+  restart() {
+    this.isPrepared = false;
+    this.hasError = false;
+    this.started = false;
+    this.isModalOpen = false;
+    this.inputTextarea.nativeElement.value = null;
+
+    this.resetCounters();
+    this.fillTimer();
+    this.formatText();
+  }
+
+  resetCounters() {
+    this.erroCounter = 0;
+    this.hitCounter = 0;
+    this.time = 0;
   }
 
   closeModal() {

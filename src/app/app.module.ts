@@ -10,7 +10,7 @@ import { BlockCopyPasteDirective } from './shared/directives/block-copy-paste.di
 @NgModule({
   declarations: [
     AppComponent,
-    BlockCopyPasteDirective
+    BlockCopyPasteDirective,
   ],
   imports: [
     BrowserModule,

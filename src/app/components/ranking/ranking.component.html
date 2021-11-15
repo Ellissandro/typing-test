@@ -1,0 +1,59 @@
+<aside class="ranking">
+    <header class="text-center my-4">
+        <h3>Ranking Global</h3>
+    </header>
+    <div class="table-container">
+        <table aria-describedby="mydesc">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Tempo</th>
+                <th scope="col">Acertos</th>
+                <th scope="col">Erros</th>
+                <th scope="col">TPM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let people of (peoples | async)">
+                <td>
+                    <div class="d-flex flex-column gap-2">
+                        {{ people.name }}
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex flex-column gap-2">
+                        {{ people.city }}
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex flex-column gap-2">
+                        {{ people.state }}
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex flex-column gap-2">
+                        {{ people.time }}
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex flex-column gap-2">
+                        {{ people.hits }}
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex flex-column gap-2">
+                        {{ people.erros }}
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex flex-column gap-2">
+                        {{ people.tpm }}
+                    </div>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+</aside>
