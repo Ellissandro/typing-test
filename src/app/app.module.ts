@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SharedComponentsModule } from './components/shared-components.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BlockCopyPasteDirective } from './shared/directives/block-copy-paste.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { BlockCopyPasteDirective } from './shared/directives/block-copy-paste.di
     BrowserModule,
     AppRoutingModule,
     SharedComponentsModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

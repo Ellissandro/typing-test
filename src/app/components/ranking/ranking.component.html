@@ -16,20 +16,20 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let people of (peoples | async)">
+              <tr *ngFor="let people of (peoples | async) ">
                 <td>
                     <div class="d-flex flex-column gap-2">
-                        {{ people.name }}
+                        {{ people.name || 'Anônimo' }}  
                     </div>
                 </td>
                 <td>
                     <div class="d-flex flex-column gap-2">
-                        {{ people.city }}
+                        {{ people.city || '-' }}
                     </div>
                 </td>
                 <td>
                     <div class="d-flex flex-column gap-2">
-                        {{ people.state }}
+                        {{ people.state || '-' }}
                     </div>
                 </td>
                 <td>
@@ -53,6 +53,10 @@
                     </div>
                 </td>
               </tr>
+
+              <div *ngIf=" (peoples | async)?.length === 0" class="d-flex align-items-center justify-content-center py-2" >
+                Nenhum registro encontrado
+              </div>
             </tbody>
         </table>
     </div>

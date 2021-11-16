@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 import * as uuid from 'uuid';
+import { People } from './shared/models/people';
+import { RankingService } from './shared/ranking.service';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +19,16 @@ export class AppComponent implements OnInit {
   erroCounter = 0;
   hitCounter = 0;
   time = 0;
+  tpm: number | null = null;
 
   isPrepared = false;
   hasError = false;
   started = false;
   isModalOpen = false;
+  people: People = new People();
+
+  constructor(private rankingService: RankingService) {
+  }
 
   generateId = () => uuid.v4();
 
@@ -32,7 +39,7 @@ export class AppComponent implements OnInit {
 
   formatText() {
     this.letters = [];
-    const letters = `Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos.`.split('');
+    const letters = `Lorem Ipsum é simplesmente uma`.split('');
 
     letters.forEach(text => {
       this.letters.push({
@@ -105,10 +112,21 @@ export class AppComponent implements OnInit {
 
     if (this.finished()) {
       this.stopTimer();
+      this.addPeopleInRank();
       this.isModalOpen = true;
     }
 
     this.hasError = this.hasErrors();
+  }
+
+  calculeTPM(): number | null {
+    if (!this.inputTextarea || !this.time) {
+      return null;
+    }
+
+    const letters: Letter[] = this.inputTextarea.nativeElement.value;
+    this.tpm = Number((letters.length / (this.time / 60)).toFixed(0));
+    return this.tpm;
   }
 
   setCounter(letterText: Letter, classType: string) {
@@ -154,6 +172,7 @@ export class AppComponent implements OnInit {
     this.resetCounters();
     this.fillTimer();
     this.formatText();
+    this.people = new People(); 
   }
 
   resetCounters() {
@@ -164,6 +183,25 @@ export class AppComponent implements OnInit {
 
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  addPeopleInRank() {
+    const people = this.getPeople();
+    this.rankingService.addPeopleInRank(people);
+  }
+
+  getPeople(): People {
+    return {
+      ...this.people,
+      hits: this.hitCounter,
+      erros: this.erroCounter,
+      tpm: this.tpm,
+      time: this.getTime()
+    }
+  }
+
+  getTime() {
+    return `${this.timerDisplay.minutes.digit1}${this.timerDisplay.minutes.digit2}:${this.timerDisplay.seconds.digit1}${this.timerDisplay.seconds.digit2}`
   }
 }
 

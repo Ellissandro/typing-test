@@ -1,53 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { People } from './models/people';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RankingService {
 
-  constructor() { }
+  // peoples$: BehaviorSubject<People[]>;
 
-  getRankingPeople(): Observable<any> {
-    return of(
-      [
-        {
-          name: 'Elissandro',
-          city: 'Guarapari',
-          state: 'ES',
-          time: '00:15',
-          hits: 90,
-          erros: 90,
-          tpm: null
-        },
-        {
-          name: 'Elissandro',
-          city: 'Guarapari',
-          state: 'ES',
-          time: '00:15',
-          hits: 90,
-          erros: 90,
-          tpm: null
-        },
-        {
-          name: 'Elissandro',
-          city: 'Guarapari',
-          state: 'ES',
-          time: '00:15',
-          hits: 90,
-          erros: 90,
-          tpm: null
-        },
-        {
-          name: 'Elissandro',
-          city: 'Guarapari',
-          state: 'ES',
-          time: '00:15',
-          hits: 90,
-          erros: 90,
-          tpm: null
-        },
-      ]
-    )
+  peoplesSource$: BehaviorSubject<People[]> = new BehaviorSubject<People[]>([]);
+  peoples$ = this.peoplesSource$.asObservable();
+
+  constructor() { 
+    this.peoples$ = this.peoplesSource$.asObservable();
+  }
+
+  addPeopleInRank(people: People) {
+    this.peoplesSource$.next(this.peoplesSource$.getValue().concat([people]));
   }
 }

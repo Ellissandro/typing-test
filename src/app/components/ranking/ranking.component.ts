@@ -19,6 +19,7 @@ export class RankingComponent implements OnInit {
   }
 
   loadRaking() {
-    this.peoples = this.rankingService.getRankingPeople();
+    debugger
+    this.peoples = this.rankingService.peoples$;
   }
 }
