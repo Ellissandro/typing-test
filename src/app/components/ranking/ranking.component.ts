@@ -19,7 +19,6 @@ export class RankingComponent implements OnInit {
   }
 
   loadRaking() {
-    debugger
     this.peoples = this.rankingService.peoples$;
   }
 }
