@@ -112,6 +112,7 @@ export class AppComponent implements OnInit {
 
     if (this.finished()) {
       this.stopTimer();
+      this.calculeTPM();
       this.addPeopleInRank();
       this.isModalOpen = true;
     }
@@ -119,14 +120,11 @@ export class AppComponent implements OnInit {
     this.hasError = this.hasErrors();
   }
 
-  calculeTPM(): number | null {
-    if (!this.inputTextarea || !this.time) {
-      return null;
+  calculeTPM() {
+    if (this.inputTextarea && this.time) {
+      const letters: Letter[] = this.inputTextarea.nativeElement.value;
+      this.tpm = Number((letters.length / (this.time / 60)).toFixed(0));
     }
-
-    const letters: Letter[] = this.inputTextarea.nativeElement.value;
-    this.tpm = Number((letters.length / (this.time / 60)).toFixed(0));
-    return this.tpm;
   }
 
   setCounter(letterText: Letter, classType: string) {

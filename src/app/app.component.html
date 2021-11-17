@@ -8,6 +8,7 @@
         <div class="form-group mb-0">
             <div class="floating-label">
                 <input 
+                    autocomplete="off"
                     [(ngModel)]="people.name"
                     type="text"
                     id="title"
@@ -21,6 +22,7 @@
         <div class="form-group mb-0">
             <div class="floating-label">
                 <input 
+                    autocomplete="off"
                     [(ngModel)]="people.city"
                     type="text"
                     id="title"
@@ -33,7 +35,8 @@
         </div>
         <div class="form-group mb-0">
             <div class="floating-label">
-                <input  
+                <input 
+                    autocomplete="off" 
                     [(ngModel)]="people.state"
                     type="text"
                     id="title"
@@ -72,7 +75,7 @@
         <div>
             <strong>Tempo: </strong>
             <span id="time">
-                {{ getTime() }}
+                 {{ timerDisplay.minutes.digit1 }}{{ timerDisplay.minutes.digit2 }}:{{ timerDisplay.seconds.digit1 }}{{ timerDisplay.seconds.digit2 }}
             </span> | 
         
             <strong>Acertos: </strong>
@@ -86,7 +89,7 @@
             <span id="totalstr">{{ letters.length }}</span> caracteres. |
 
             <strong>TPM: </strong>
-            <span id="tpm">{{ calculeTPM() }}</span><br>
+            <span id="tpm">{{ tpm }}</span><br>
 
             <button (click)="restart()" type="button" class="btn btn-warning mt-3">Começar um novo teste</button>
         </div>
@@ -111,11 +114,11 @@
             
             <p>
                 <strong>TPM: </strong>
-                <span>{{ calculeTPM() }}</span>
+                <span>{{ tpm }}</span>
             </p>
             <p>
                 <strong>Tempo: </strong>
-                <span>{{ getTime() }}</span>
+                <span> {{ timerDisplay.minutes.digit1 }}{{ timerDisplay.minutes.digit2 }}:{{ timerDisplay.seconds.digit1 }}{{ timerDisplay.seconds.digit2 }}</span>
             </p> 
             <p>
                 <strong>Acertos: </strong>
