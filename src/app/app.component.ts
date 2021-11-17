@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   hasError = false;
   started = false;
   isModalOpen = false;
-  people: People = new People();
+  people: People = new People(0);
 
   constructor(private rankingService: RankingService) {
   }
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
 
   formatText() {
     this.letters = [];
-    const letters = `Lorem Ipsum é simplesmente uma`.split('');
+    const letters = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown`.split('');
 
     letters.forEach(text => {
       this.letters.push({
@@ -170,7 +170,7 @@ export class AppComponent implements OnInit {
     this.resetCounters();
     this.fillTimer();
     this.formatText();
-    this.people = new People(); 
+    this.people = new People(0); 
   }
 
   resetCounters() {
@@ -180,21 +180,22 @@ export class AppComponent implements OnInit {
   }
 
   closeModal() {
-    this.isModalOpen = false;
+    this.restart();
   }
 
   addPeopleInRank() {
     const people = this.getPeople();
-    this.rankingService.addPeopleInRank(people);
+    this.rankingService.createNewPeople(people);
   }
 
   getPeople(): People {
     return {
       ...this.people,
       hits: this.hitCounter,
-      erros: this.erroCounter,
+      errors_count: this.erroCounter,
       tpm: this.tpm,
-      time: this.getTime()
+      time: this.getTime(),
+      seconds: this.time
     }
   }
 

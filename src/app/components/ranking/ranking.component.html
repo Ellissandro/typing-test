@@ -16,7 +16,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let people of (peoples | async) ">
+              <tr *ngFor="let people of (peoples | async)">
                 <td>
                     <div class="d-flex flex-column gap-2">
                         {{ people.name || 'Anônimo' }}  
@@ -44,7 +44,7 @@
                 </td>
                 <td>
                     <div class="d-flex flex-column gap-2">
-                        {{ people.erros }}
+                        {{ people?.errors_count || 0 }}
                     </div>
                 </td>
                 <td>

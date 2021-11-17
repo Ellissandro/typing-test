@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { People } from 'src/app/shared/models/people';
 import { RankingService } from 'src/app/shared/ranking.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { RankingService } from 'src/app/shared/ranking.service';
 })
 export class RankingComponent implements OnInit {
 
-  peoples: Observable<any[]>;
+  peoples: Observable<People[]>;
 
   constructor(private rankingService: RankingService) {
   }
