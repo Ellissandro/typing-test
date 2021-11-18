@@ -35,11 +35,12 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.fillTimer();
     this.formatText();
+    this.setFocusElement('title');
   }
 
   formatText() {
     this.letters = [];
-    const letters = `O programador é o profissional que cria, desenvolve e mantém diferentes tipos de softwares em sistemas amplos ou para uso em computadores pessoais. Ele usa linguagens de programação para criar comandos em programas e dar vida à novas funcionalidades e utilidades.`.split('');
+    const letters = `O programador é o profissional`.split('');
 
     letters.forEach(text => {
       this.letters.push({
@@ -171,6 +172,7 @@ export class AppComponent implements OnInit {
     this.fillTimer();
     this.formatText();
     this.people = new People(0); 
+    this.setFocusElement('title');
   }
 
   resetCounters() {
@@ -201,6 +203,10 @@ export class AppComponent implements OnInit {
 
   getTime() {
     return `${this.timerDisplay.minutes.digit1}${this.timerDisplay.minutes.digit2}:${this.timerDisplay.seconds.digit1}${this.timerDisplay.seconds.digit2}`
+  }
+
+  setFocusElement(id: string) {
+    setTimeout(() => document.getElementById(id).focus())
   }
 }
 

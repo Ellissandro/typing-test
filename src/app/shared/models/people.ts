@@ -1,5 +1,5 @@
 export class People {
-    constructor(public seconds: number,
+    constructor(public seconds?: number,
                 public name?: string,
                 public city?: string,
                 public state?: string,

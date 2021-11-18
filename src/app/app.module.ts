@@ -8,13 +8,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BlockCopyPasteDirective } from './shared/directives/block-copy-paste.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { SortPipe } from './shared/pipes/sort';
 
 @NgModule({
   declarations: [
     AppComponent,
     BlockCopyPasteDirective,
-    SortPipe
   ],
   imports: [
     BrowserModule,
@@ -23,7 +21,7 @@ import { SortPipe } from './shared/pipes/sort';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

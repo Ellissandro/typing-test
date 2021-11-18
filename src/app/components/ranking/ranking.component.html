@@ -1,8 +1,19 @@
-<aside class="ranking">
+<aside class="ranking position-relative">
     <header class="text-center my-4">
         <h3>Ranking Global</h3>
     </header>
+    
     <div class="table-container">
+        <div class="d-flex align-items-center justify-content-end py-2">
+            <ngb-pagination 
+                [collectionSize]="pagination.collection_size" 
+                [pageSize]="pagination.page_size"
+                [(page)]="pagination.page" 
+                (pageChange)="setPagination()"
+                [boundaryLinks]="true">
+            </ngb-pagination>
+        </div>
+
         <table aria-describedby="mydesc">
             <thead>
               <tr>
@@ -16,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let people of (peoples | async)">
+              <tr *ngFor="let people of peoples">
                 <td>
                     <div class="d-flex flex-column gap-2">
                         {{ people.name || 'Anônimo' }}  
@@ -54,10 +65,15 @@
                 </td>
               </tr>
 
-              <div *ngIf=" (peoples | async)?.length === 0" class="d-flex align-items-center justify-content-center py-2" >
-                Nenhum registro encontrado
+              <div class="d-flex align-items-center justify-content-center py-2" >
+                    <span *ngIf="peoples?.length === 0 && !loader" >Nenhum registro encontrado</span>
+
+                    <span *ngIf="loader">
+                        <app-loader color="var(--color-primary)"></app-loader>
+                    </span>
               </div>
             </tbody>
+
         </table>
     </div>
 </aside>

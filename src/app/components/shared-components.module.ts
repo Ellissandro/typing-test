@@ -4,22 +4,24 @@ import { LoaderComponent } from './loader/loader.component';
 import { ModalComponent } from './modal/modal.component';
 import { HeaderComponent } from './header/header.component';
 import { RankingComponent } from './ranking/ranking.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
         LoaderComponent,
         ModalComponent,
         HeaderComponent,
-        RankingComponent
+        RankingComponent,
     ],
     imports: [
         CommonModule,
+        NgbModule
     ],
     exports: [
         LoaderComponent,
         ModalComponent,
         HeaderComponent,
-        RankingComponent
+        RankingComponent,
     ]
 })
 export class SharedComponentsModule { }

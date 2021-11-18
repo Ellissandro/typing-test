@@ -164,7 +164,7 @@ select {
     > li > a {
         background-color: white;
         color: var(--color-muted);
-        border-radius: 7px;
+        border-radius: 4px;
         margin: 0 0.7rem;
         padding: 4px 7px;
         font-weight: 500;
@@ -255,4 +255,18 @@ table {
     margin-right: auto;
     margin-left: auto;
     width: 1170px;
+}
+
+@media (max-width: 600px) {
+    .content {
+        width: 100%;
+    }
+    
+    .d-flex {
+        flex-direction: column;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
 }
