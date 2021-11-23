@@ -2,11 +2,16 @@
   "name": "typing-test",
   "version": "0.0.0",
   "scripts": {
+    "start": "node server.js",
+    "postinstall": "ng build --aot --prod",
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
+  },
+  "engines": {
+    "node": "17.17.3",
+    "npm": "6.14.13"
   },
   "private": true,
   "dependencies": {
@@ -19,10 +24,15 @@
     "@angular/platform-browser": "~12.1.1",
     "@angular/platform-browser-dynamic": "~12.1.1",
     "@angular/router": "~12.1.1",
+    "@datorama/akita": "^6.2.4",
+    "@datorama/akita-ng-entity-service": "^6.0.0",
+    "@datorama/akita-ng-router-store": "^6.0.0",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
-    "socket.io-client": "^4.2.0",
+    "akita-ng-fire": "^3.1.6",
     "bootstrap": "^4.5.0",
+    "express": "^4.17.1",
     "rxjs": "~6.6.0",
+    "socket.io-client": "^4.2.0",
     "tslib": "^2.2.0",
     "uuid": "^8.3.2",
     "zone.js": "~0.11.4"
@@ -31,6 +41,7 @@
     "@angular-devkit/build-angular": "~12.1.1",
     "@angular/cli": "~12.1.1",
     "@angular/compiler-cli": "~12.1.1",
+    "@datorama/akita-ngdevtools": "^6.0.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "@types/uuid": "^8.3.1",
