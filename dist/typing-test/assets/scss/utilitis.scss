@@ -1,0 +1,39 @@
+.invalid-field {
+    color: var(--color-danger);
+    font-weight: 400;
+    font-size: 0.75rem;
+
+    margin-top: .5rem;
+    margin-left: 3px;
+}
+
+.error-messages {
+    background: var(--color-danger-light);
+    border: 1px solid var(--color-danger-light-medium);
+    color: var(--color-danger-heavy);
+
+    padding: 1rem;
+
+    border-radius: 4px;
+    margin-bottom: 1rem;
+
+    &::before{
+        content: "\f071";
+        font-family: "Font Awesome 5 Free"; 
+        font-weight: 900; 
+        margin-right: .5rem;
+    }
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.text {
+    font-size: 16px;
+    line-height: 1.4;
+}
