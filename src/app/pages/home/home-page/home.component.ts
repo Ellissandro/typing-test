@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
 
   formatText() {
     this.letters = [];
-    const letters = `O programador é o profissional que cria, desenvolve e mantém diferentes tipos de softwares em sistemas amplos ou para uso em computadores pessoais. Ele usa linguagens de programação para criar comandos em programas e dar vida à novas funcionalidades e utilidades.`.split('');
+    const letters = `O programador é o profissional que cria, desenvolve e mantém diferentes tipos de softwares em sistemas amplos ou para uso em computadores pessoais.`.split('');
 
     letters.forEach(text => {
       this.letters.push({
