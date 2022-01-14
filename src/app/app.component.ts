@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
 
   formatText() {
     this.letters = [];
-    const letters = `O programador é o profissional`.split('');
+    const letters = `O programador é o profissional que cria, desenvolve e mantém diferentes tipos de softwares em sistemas amplos ou para uso em computadores pessoais.`.split('');
 
     letters.forEach(text => {
       this.letters.push({
@@ -171,6 +171,7 @@ export class AppComponent implements OnInit {
     this.resetCounters();
     this.fillTimer();
     this.formatText();
+    this.stopTimer();
     this.people = new People(0); 
     this.setFocusElement('title');
   }
