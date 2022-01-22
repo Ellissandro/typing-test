@@ -39,6 +39,7 @@ export class TypingTestComponent implements OnInit {
   }
 
   formatText(): void {
+    this.letters = [];
     const letters =
       `O programador é o profissional que cria, desenvolve e mantém diferentes tipos de softwares em sistemas amplos ou para uso em computadores pessoais.`.split(
         '',
