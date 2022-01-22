@@ -1,18 +1,18 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
+import { ClassType, Letter, Timer } from 'src/app/pages/typing/typing.model';
 import { People } from 'src/app/shared/models/people';
-import { RankingService } from 'src/app/shared/ranking.service';
+import { RankingService } from 'src/app/shared/services/ranking.service';
 import * as uuid from 'uuid';
-import { ClassType, Letter, Timer } from '../state/home.model';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-typing-test',
+  templateUrl: './typing-test.component.html',
+  styleUrls: ['./typing-test.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class TypingTestComponent implements OnInit {
   @ViewChild('inputTextarea') inputTextarea: ElementRef;
-  
+
   subscription: Subscription;
   timerDisplay: Timer;
   letters: Letter[] = [];
@@ -28,45 +28,46 @@ export class HomeComponent implements OnInit {
   isModalOpen = false;
   people: People = new People(0);
 
-  constructor(private rankingService: RankingService) {
-  }
+  constructor(private rankingService: RankingService) {}
 
-  generateId = () => uuid.v4();
+  generateId = (): string => uuid.v4();
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.fillTimer();
     this.formatText();
     this.setFocusElement('title');
   }
 
-  formatText() {
-    this.letters = [];
-    const letters = `O programador é o profissional que cria, desenvolve e mantém diferentes tipos de softwares em sistemas amplos ou para uso em computadores pessoais.`.split('');
+  formatText(): void {
+    const letters =
+      `O programador é o profissional que cria, desenvolve e mantém diferentes tipos de softwares em sistemas amplos ou para uso em computadores pessoais.`.split(
+        '',
+      );
 
-    letters.forEach(text => {
+    letters.forEach((text) => {
       this.letters.push({
         id: this.generateId(),
         text: text,
-        class: ClassType.default
-      })
-    })
+        class: ClassType.default,
+      });
+    });
   }
 
-  prepareToStart(event: Event) {
+  prepareToStart(event: Event): void {
     event.preventDefault();
     this.isPrepared = true;
     this.setFocusTextarea();
   }
 
-  fillTimer() {
+  fillTimer(): void {
     this.timerDisplay = new Timer(
       { digit1: 0, digit2: 0 },
       { digit1: 0, digit2: 0 },
       { digit1: 0, digit2: 0 },
-    )
+    );
   }
 
-  startTimer() {
+  startTimer(): void {
     this.subscription = timer(0, 1000).subscribe(() => {
       this.time++;
       this.timerDisplay = this.getDisplayTimer(this.time);
@@ -75,23 +76,32 @@ export class HomeComponent implements OnInit {
     this.started = true;
   }
 
-  stopTimer() {
+  stopTimer(): void {
     this.subscription.unsubscribe();
   }
 
   getDisplayTimer(time: number): Timer {
     const hours = '0' + Math.floor(time / 3600);
-    const minutes = '0' + Math.floor(time % 3600 / 60);
-    const seconds = '0' + Math.floor(time % 3600 % 60);
+    const minutes = '0' + Math.floor((time % 3600) / 60);
+    const seconds = '0' + Math.floor((time % 3600) % 60);
 
     return {
-      hours: { digit1: Number(hours.slice(-2, -1)), digit2: Number(hours.slice(-1)) },
-      minutes: { digit1: Number(minutes.slice(-2, -1)), digit2: Number(minutes.slice(-1)) },
-      seconds: { digit1: Number(seconds.slice(-2, -1)), digit2: Number(seconds.slice(-1)) },
+      hours: {
+        digit1: Number(hours.slice(-2, -1)),
+        digit2: Number(hours.slice(-1)),
+      },
+      minutes: {
+        digit1: Number(minutes.slice(-2, -1)),
+        digit2: Number(minutes.slice(-1)),
+      },
+      seconds: {
+        digit1: Number(seconds.slice(-2, -1)),
+        digit2: Number(seconds.slice(-1)),
+      },
     };
   }
 
-  checkText() {
+  checkText(): void {
     if (!this.started) {
       this.startTimer();
     }
@@ -101,16 +111,14 @@ export class HomeComponent implements OnInit {
 
       if (letterInput == null) {
         letterText.class = '';
-
       } else if (letterInput === letterText.text) {
         this.setCounter(letterText, ClassType.correct);
         letterText.class = ClassType.correct;
-
       } else {
         this.setCounter(letterText, ClassType.wrong);
         letterText.class = ClassType.wrong;
       }
-    }) 
+    });
 
     if (this.finished()) {
       this.stopTimer();
@@ -122,47 +130,46 @@ export class HomeComponent implements OnInit {
     this.hasError = this.hasErrors();
   }
 
-  calculeTPM() {
+  calculeTPM(): void {
     if (this.inputTextarea && this.time) {
       const letters: Letter[] = this.inputTextarea.nativeElement.value;
       this.tpm = Number((letters.length / (this.time / 60)).toFixed(0));
     }
   }
 
-  setCounter(letterText: Letter, classType: string) {
+  setCounter(letterText: Letter, classType: string): void {
     if (letterText.class === ClassType.default) {
-
       if (classType === ClassType.correct) {
         this.hitCounter++;
-          
       } else {
         this.erroCounter++;
       }
     }
   }
 
-  setFocusTextarea() {
+  setFocusTextarea(): void {
     setTimeout(() => this.inputTextarea.nativeElement.focus());
   }
 
   hasErrors(): boolean {
-     return this.letters.some(letter => letter.class === ClassType.wrong);
+    return this.letters.some((letter) => letter.class === ClassType.wrong);
   }
 
   wroteEverythingRight(): boolean {
-    return this.letters.every(letter => letter.class === ClassType.correct);
+    return this.letters.every((letter) => letter.class === ClassType.correct);
   }
 
   finished(): boolean {
     if (!this.inputTextarea) {
       return false;
     }
-    
-    const typedEverything = this.letters.length === this.inputTextarea.nativeElement.value.length;
+
+    const typedEverything =
+      this.letters.length === this.inputTextarea.nativeElement.value.length;
     return typedEverything && this.wroteEverythingRight();
   }
 
-  restart() {
+  restart(): void {
     this.isPrepared = false;
     this.hasError = false;
     this.started = false;
@@ -173,24 +180,23 @@ export class HomeComponent implements OnInit {
     this.resetCounters();
     this.fillTimer();
     this.formatText();
-    this.people = new People(0); 
+    this.people = new People(0);
     this.setFocusElement('title');
   }
 
-  resetCounters() {
+  resetCounters(): void {
     this.erroCounter = 0;
     this.hitCounter = 0;
     this.time = 0;
   }
-  
 
-  closeModal() {
+  closeModal(): void {
     this.restart();
   }
 
-  addPeopleInRank() {
+  addPeopleInRank(): void {
     const people = this.getPeople();
-    this.rankingService.createNewPeople(people);
+    this.rankingService.addPeopleInRank(people);
   }
 
   getPeople(): People {
@@ -200,15 +206,17 @@ export class HomeComponent implements OnInit {
       errors_count: this.erroCounter,
       tpm: this.tpm,
       time: this.getTime(),
-      seconds: this.time
-    }
+      seconds: this.time,
+    };
   }
 
-  getTime() {
-    return `${this.timerDisplay.minutes.digit1}${this.timerDisplay.minutes.digit2}:${this.timerDisplay.seconds.digit1}${this.timerDisplay.seconds.digit2}`
+  getTime(): string {
+    const minutes = `${this.timerDisplay.minutes.digit1}${this.timerDisplay.minutes.digit2}`;
+    const seconds = `${this.timerDisplay.seconds.digit1}${this.timerDisplay.seconds.digit2}`;
+    return `${minutes}:${seconds}`;
   }
 
-  setFocusElement(id: string) {
-    setTimeout(() => document.getElementById(id).focus())
+  setFocusElement(id: string): void {
+    setTimeout(() => document.getElementById(id).focus());
   }
 }

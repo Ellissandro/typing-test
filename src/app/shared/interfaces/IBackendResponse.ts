@@ -1,3 +1,3 @@
 export interface IBackendResponse<T> {
-    matches: T;
+  matches: T;
 }
